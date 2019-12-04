@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Painter</title>
+    <style>
+        div#control{
+            position:fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="control">
+        <button id="clear">清空</button>
+    </div>
+    <canvas width=5000 height=5000 id="myCanvas"></canvas>
+    <script type="text/javascript">
+        var point1;
+        var point2;
+        var isDown = false;
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext('2d');
+        ctx.strokStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        canvas.addEventListener('mousedown', function (e) {
+            isDown = true;
+            point1 = [e.layerX, e.layerY];
+        });
+        canvas.addEventListener('mousemove', function (e) {
+            if (isDown) {
+                point2 = [e.layerX, e.layerY];
+                ctx.moveTo(...point1);
+                ctx.lineTo(...point2);
+                ctx.stroke();
+                point1 = point2.slice(0);
+            }
+        })
+        canvas.addEventListener('mouseup', function (e) {
+            isDown = false;
+        })
+        var clearButton = document.getElementById("clear");
+        clearButton.addEventListener('click',function(e){
+            ctx.fillStyle="#ffffff";
+            ctx.beginPath();
+            ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.closePath();
+        })
+    </script>
+</body>
+
+</html>
