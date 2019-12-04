@@ -32,7 +32,7 @@
         });
         canvas.addEventListener('touchstart', function (e) {
             isDown = true;
-            point1 = [e.layerX, e.layerY];
+            point1 = [e.touches[0].pageX, e.touches[0].pageY];
         });
         canvas.addEventListener('mousemove', function (e) {
             if (isDown) {
@@ -45,7 +45,7 @@
         })
         canvas.addEventListener('touchmove', function (e) {
             if (isDown) {
-                point2 = [e.layerX, e.layerY];
+                point2 = [e.touches[0].pageX, e.touches[0].pageY];
                 ctx.moveTo(...point1);
                 ctx.lineTo(...point2);
                 ctx.stroke();
