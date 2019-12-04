@@ -30,6 +30,10 @@
             isDown = true;
             point1 = [e.layerX, e.layerY];
         });
+        canvas.addEventListener('touchstart', function (e) {
+            isDown = true;
+            point1 = [e.layerX, e.layerY];
+        });
         canvas.addEventListener('mousemove', function (e) {
             if (isDown) {
                 point2 = [e.layerX, e.layerY];
@@ -39,7 +43,19 @@
                 point1 = point2.slice(0);
             }
         })
+        canvas.addEventListener('touchmove', function (e) {
+            if (isDown) {
+                point2 = [e.layerX, e.layerY];
+                ctx.moveTo(...point1);
+                ctx.lineTo(...point2);
+                ctx.stroke();
+                point1 = point2.slice(0);
+            }
+        })
         canvas.addEventListener('mouseup', function (e) {
+            isDown = false;
+        })
+        canvas.addEventListener('touchend', function (e) {
             isDown = false;
         })
         var clearButton = document.getElementById("clear");
