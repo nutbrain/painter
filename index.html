@@ -7,6 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Painter</title>
     <style>
+        *{
+            margin:0;
+            padding:0;
+            border:none;
+        }
+        body{
+            height:100vh;
+            width:100vw;
+        }
         div#control{
             position:fixed;
         }
@@ -17,12 +26,14 @@
     <div id="control">
         <button id="clear">清空</button>
     </div>
-    <canvas width=5000 height=5000 id="myCanvas"></canvas>
+    <canvas id="myCanvas"></canvas>
     <script type="text/javascript">
         var point1;
         var point2;
         var isDown = false;
         var canvas = document.getElementById("myCanvas");
+        canvas.height=document.body.clientHeight-10;
+        canvas.width=document.body.clientWidth-10;
         var ctx = canvas.getContext('2d');
         ctx.strokStyle = "#ffffff";
         ctx.lineWidth = 2;
